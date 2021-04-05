@@ -1,0 +1,90 @@
+.list {
+    background-color: #ebecf0;
+    min-width: 300px;
+    margin: 5px 10px;
+    padding: 1rem;
+    height: fit-content;
+    position: relative;
+    border-radius: 3px;
+    box-shadow: 1px 1px 1px rgb(75, 75, 75);
+    .title {
+        justify-content: space-between;
+        color: rgb(46, 44, 44);
+        p {
+            font-family: inter-medium;
+        }
+        .edit-icons {
+            position: absolute;
+            right: 55px;
+            top: 20px;
+        }
+        input {
+            position: absolute;
+            border: 2px solid rgb(0, 145, 255);
+            border-radius: 3px;
+        }
+    }
+    .action-btn {
+        border-radius: 3px;
+        padding: 3px;
+    }
+    .action-btn:hover {
+        background-color: rgb(218, 218, 218);
+    }
+    .add-list {
+        color: rgb(89, 89, 89);
+        p {
+            font-family: inter-medium;
+        }
+    }
+}
+.pre-edit {
+    cursor: pointer;
+    padding: 10px 0;
+    border-radius: 3px;
+    color: rgb(89, 89, 89);
+    p {
+        font-family: inter-medium;
+    }
+}
+.pre-edit:hover {
+    background-color: rgb(218, 218, 218);
+}
+.edit {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    textarea {
+        min-width: 268px;
+        max-width: 268px;
+        min-height: 80px;
+        max-height: fit-content;
+        margin: 0 0 10px 0;
+        border: none;
+        border-radius: 3px;
+        padding: 5px;
+        box-shadow: 0px 1px 1px gray;
+    }
+    .icon-in {
+        font-size: 1.3rem;
+        color: rgb(111, 111, 111);
+        cursor: pointer;
+        margin-left: 10px;
+    }
+    .icon-in:hover {
+        color: rgb(0, 0, 0);
+    }
+}
+
+.options {
+    position: absolute;
+    top: 20px;
+    right: -215px;
+    z-index: 2;
+}
+@media(max-width:650px){
+    .options{
+        right:-10px;
+    }
+}

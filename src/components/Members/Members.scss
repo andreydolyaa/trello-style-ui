@@ -1,0 +1,50 @@
+.members {
+    background-color: rgb(255, 255, 255);
+    color: #4b4b4b;
+    font-size: 13px;
+    font-family: inter-medium;
+    min-width: 200px;
+    padding: 10px;
+    border-radius: 3px;
+    box-shadow: 1px 1px 1px rgb(58, 75, 97);
+    .user-container {
+        margin: 15px 0;
+        line-height: 10px;
+        position: relative;
+    }
+    .user-container:hover{
+        p{
+            color:rgb(0, 123, 255);
+        }
+    }
+    .title {
+        border-bottom: 1px solid #b5b5b5;
+        text-align: center;
+        padding-bottom: 5px;
+        font-family: inter-bold;
+    }
+    .curr-members {
+        overflow-y: scroll;
+        max-height: 300px;
+        .email {
+            font-size: 9px;
+            font-family: inter-bold;
+        }
+    }
+    .search {
+        text-align: center;
+        margin-top: 2rem;
+        p {
+            font-size: 11px;
+            font-family: inter-bold;
+        }
+    }
+    .icon-add {
+        position: absolute;
+        right: 0;
+        top: 0px;
+    }
+    .search:hover {
+        color: rgb(12, 93, 179);
+    }
+}

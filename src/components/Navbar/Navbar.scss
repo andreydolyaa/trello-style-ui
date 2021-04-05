@@ -1,0 +1,45 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 7vh;
+    background-color: rgba(252, 252, 252, 0.2);
+    padding: 0 5px 0 5px;
+    .title {
+        a {
+            color: white;
+            text-decoration: none;
+            font-size: 13px;
+            margin-left: 2rem;
+            letter-spacing: 1px;
+        }
+        a:hover{
+            color:rgb(186, 212, 247);
+        }
+        h1 {
+            padding: 10px;
+            font-family: inter-bold;
+            color: white;
+            cursor: pointer;
+        }
+    }
+}
+.boards {
+    border: 1px solid rgb(0, 0, 0);
+    padding: 3px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+@media(max-width:500px){
+    .navbar{
+        p,a{
+            font-size:12px;
+            margin-left:5px;
+        }
+        .title{
+            a{
+                display: none;
+            }
+        }
+    }
+}

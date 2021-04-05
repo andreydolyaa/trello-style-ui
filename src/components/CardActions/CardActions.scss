@@ -1,0 +1,26 @@
+
+
+.card-actions{
+    height:500px;
+    width:150px;
+    border-radius: 3px;
+    background-color: rgb(38, 46, 54);
+    color:white;
+    padding:10px;
+    font-size:12px;
+    cursor: default;
+    .title{
+        text-align: center;
+        border-bottom: 1px solid white;
+        color:white !important;
+        padding-bottom: 10px;
+    }
+    .option{
+        margin:15px 0;
+        cursor: pointer;
+    }
+    .option:hover{
+        color:rgb(162, 162, 162);
+    }
+    
+}

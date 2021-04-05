@@ -1,0 +1,37 @@
+.home {
+    z-index: 1;
+    .all-lists {
+        display: Flex;
+        overflow-y: auto;
+        min-height: 87vh;
+        div {
+            height: fit-content;
+        }
+    }
+    .add-list {
+        cursor: pointer;
+        p {
+            font-weight: 500;
+        }
+    }
+}
+
+.add {
+    input {
+        width: 100%;
+        margin-top: 5px;
+    }
+    button {
+        width: 100%;
+        margin-top: 5px;
+    }
+}
+
+@media(max-width:890px){
+    .home{
+        .all-lists{
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    }
+}

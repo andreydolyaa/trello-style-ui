@@ -1,0 +1,36 @@
+
+.signup,.login{
+    flex-direction: column;
+    padding:5rem;
+    background-color: rgb(82, 105, 136);
+    width:400px;
+    margin: auto;
+    border-radius: 3px;
+    margin-top:5rem;
+    position: relative;
+    box-shadow: 1px 1px 1px rgb(58, 75, 97);;
+    input{
+        width:250px;
+        border:1px solid rgb(201, 201, 201);
+    }
+    p{
+        margin:5px 0px;
+    }
+    button{
+        margin:25px 0px;
+        background-color: rgb(45, 63, 84);
+    }
+    button:hover{
+        background-color: rgb(36, 46, 58);
+    }
+    .err{
+        position: absolute;
+        bottom:20px;
+    }
+}
+.signup > * {
+    margin:5px;
+}
+.login > * {
+    margin:5px;
+}

@@ -1,0 +1,21 @@
+.color-menu{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(255, 255, 255);
+    border-radius: 3px;
+    max-width: 90px;
+    box-shadow: 1px 1px 1px rgb(121, 121, 121);
+    .color{
+        width:20px;
+        height:20px;
+        margin:5px;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: .2s;
+    }
+    .color:hover{
+        box-shadow: 1px 1px 1px rgb(0, 0, 0);
+    }
+}
