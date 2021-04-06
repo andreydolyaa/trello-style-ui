@@ -90,6 +90,9 @@ export default function Card({ card, board, list, setMoveCardModal }) {
                     <VscEdit style={{ color: '#484848', fontSize: '14px' }} />
                 </div>
             }
+            <div className="card-options-mobile flex" onClick={() => setShowCardActions(card => !card)}>
+                <VscEdit style={{ color: '#484848', fontSize: '14px' }} />
+            </div>
             {showCardActions &&
                 <motion.div className="card-menu" initial="out" animate="in" exit="out" variants={pageTransition}>
                     <CardActions
