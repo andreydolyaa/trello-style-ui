@@ -11,7 +11,7 @@ import { loadBoard, updateBoard } from '../../store/actions/boardActions';
 import ToolPanel from '../../components/ToolPanel/ToolPanel';
 import { motion } from "framer-motion";
 
-export default function Home({ load, changeBoard, showBoardsMenu, setMoveCardModal, setCreateBoard}) {
+export default function Home({ load, changeBoard, showBoardsMenu, setMoveCardModal, setCreateBoard }) {
     const titleRef = useRef();
     const dispatch = useDispatch();
     const [isEditable, setIsEditable] = useState(false);
@@ -35,14 +35,23 @@ export default function Home({ load, changeBoard, showBoardsMenu, setMoveCardMod
     const listDragEnd = (res) => {
         if (!res.destination) return;
         else {
-            const boardCopy = [...board.lists];
             const newBoard = { ...board };
-            const [srcList] = boardCopy.splice(res.source.index, 1);
-            boardCopy.splice(res.destination.index, 0, srcList);
-            newBoard.lists = boardCopy;
+            const [srcList] = newBoard.lists.splice(res.source.index, 1);
+            newBoard.lists.splice(res.destination.index, 0, srcList);
             dispatch(updateBoard(newBoard));
         }
     }
+    // const listDragEnd = (res) => {
+    //     if (!res.destination) return;
+    //     else {
+    //         const boardCopy = [...board.lists];
+    //         const newBoard = { ...board };
+    //         const [srcList] = boardCopy.splice(res.source.index, 1);
+    //         boardCopy.splice(res.destination.index, 0, srcList);
+    //         newBoard.lists = boardCopy;
+    //         dispatch(updateBoard(newBoard));
+    //     }
+    // }
 
     const pageTransition1 = {
         in: { opacity: 1, y: 0, transition: { duration: 0.2 } },

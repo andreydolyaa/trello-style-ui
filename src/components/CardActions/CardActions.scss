@@ -22,5 +22,14 @@
     .option:hover{
         color:rgb(162, 162, 162);
     }
+    .img-upload{
+        input{
+            min-width:50px !important;
+            width:130px !important;
+        }
+        button{
+            width:130px;
+        }
+    }
     
 }

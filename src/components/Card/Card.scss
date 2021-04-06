@@ -11,6 +11,27 @@
     position: relative;
     white-space: pre-line;
     line-height: 18px;
+    .img-container {
+        img {
+            max-width: 260px;
+            max-height:260px;
+            margin: 1px 0 1rem 0;
+            padding:0 1px;
+            border-radius: 3px;
+        }
+        .delete-image{
+            position: absolute;
+            background-color: rgb(24, 24, 24);
+            color:white;
+            border-radius: 3px;
+            padding:5px 15px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        .delete-image:hover{
+            background-color: rgb(58, 58, 58);
+        }
+    }
     p {
         font-family: inter-regular;
     }
@@ -24,7 +45,7 @@
         border-radius: 3px;
         cursor: pointer;
     }
-    .card-options-mobile{
+    .card-options-mobile {
         display: none;
         position: absolute;
         top: 6px;
@@ -75,10 +96,10 @@
 }
 @media (max-width: 650px) {
     .card {
-        .card-menu{
-            left:150px;
+        .card-menu {
+            left: 150px;
         }
-        .card-options-mobile{
+        .card-options-mobile {
             display: block;
         }
     }

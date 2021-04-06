@@ -45,6 +45,14 @@ export default function Card({ card, board, list, setMoveCardModal }) {
         setShowIcon(false);
     }
 
+    const removeImage = () => {
+        const updatedBoard = { ...board };
+        const listIdx = updatedBoard.lists.findIndex(currList => currList._id === list._id);
+        const cardIdx = list.cards.findIndex(currCard => currCard._id === card._id);
+        delete updatedBoard.lists[listIdx].cards[cardIdx].img;
+        dispatch(updateBoard(updatedBoard));
+    }
+
 
     const pageTransition = {
         in: {
@@ -73,6 +81,10 @@ export default function Card({ card, board, list, setMoveCardModal }) {
             {showEditCard &&
                 <motion.div className="edit-card" initial="out" animate="in" exit="out" variants={pageTransition1}>
                     <textarea defaultValue={card.title} ref={newTitleRef}></textarea>
+                    {card.img && <div className="img-container flex-center">
+                        <img src={card.img}></img>
+                        <div className="delete-image" onClick={removeImage}>Delete image</div>
+                    </div>}
                     <div className="flex">
                         <button onClick={saveEditedCard}>Save</button>
                         <FiX className="icon-close"
@@ -82,6 +94,11 @@ export default function Card({ card, board, list, setMoveCardModal }) {
             }
             {!showEditCard &&
                 <div>
+                    <div className="img-container flex-center">
+                        {card.img &&
+                            <img src={card.img}></img>
+                        }
+                    </div>
                     <p>{card.title}</p>
                 </div>
             }

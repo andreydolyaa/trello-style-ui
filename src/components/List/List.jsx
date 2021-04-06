@@ -41,9 +41,11 @@ export default function List({ list, board, load, changeBoard, setMoveCardModal 
         var updatedBoard = await boardService.createCard(board, list, cardRef.current.value, 'card');
         load();
         changeBoard(updatedBoard.board._id);
+        cardRef.current.value = '';
     }
 
     const cardDragEnd = (res) => {
+        console.log(res);
         if (!res.destination) return;
         else {
             const boardCopy = { ...board };
@@ -132,7 +134,7 @@ export default function List({ list, board, load, changeBoard, setMoveCardModal 
 
                             {isEditable &&
                                 <motion.div className="edit" initial="out" animate="in" exit="out" variants={pageTransition1}>
-                                    <textarea ref={cardRef} placeholder="Write something..."/>
+                                    <textarea ref={cardRef} placeholder="Write something..." />
                                     <div className="flex">
                                         <button onClick={addNewCard}>Add card</button>
                                         <div onClick={(ev) => stopEditing(ev)} className="icon-in flex">
