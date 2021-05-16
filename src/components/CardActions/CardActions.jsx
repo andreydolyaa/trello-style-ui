@@ -14,6 +14,7 @@ export default function CardActions({ card, board, list, setShowEditCard, setSho
     const imageRef = useRef();
     const [showColors, setShowColors] = useState(false);
     const [isUploading, setIsUploading] = useState(false);
+    const [showLabels, setShowLabels] = useState(false);
 
     useEffect(() => {
     }, [card, board, list]);
@@ -74,12 +75,35 @@ export default function CardActions({ card, board, list, setShowEditCard, setSho
         out: { opacity: 0, y: -10, }
     };
 
+    const setLabel = (label) => {
+        const updatedBoard = { ...board };
+        const listIdx = updatedBoard.lists.findIndex(currList => currList._id === list._id);
+        const cardIdx = list.cards.findIndex(currCard => currCard._id === card._id);
+        if (updatedBoard.lists[listIdx].cards[cardIdx].labels.some(l => l.labelColor === label)) return;
+        else {
+            updatedBoard.lists[listIdx].cards[cardIdx].labels.push({ id: utils.createId(), labelColor: label });
+            doUpdate(updatedBoard);
+        }
+    }
+
     return (
         <div className="card-actions">
             <FiX className="close" style={{ margin: '3px' }} onClick={() => { setShowCardActions(false); setShowIcon(false) }} />
             <div className="title">Card actions</div>
             <div className="option" onClick={deleteCard}>Delete this card</div>
             <div className="option" onClick={() => setShowEditCard(card => !card)}>Edit this card</div>
+            <div className="option" onClick={() => setShowLabels(label => !label)}>Add Label</div>
+
+
+            {showLabels &&
+                <motion.div initial="out" animate="in" exit="out" variants={pageTransition1}>
+                    <div className="color" style={{ backgroundColor: '#86E42E' }} onClick={() => setLabel('#86E42E')}></div>
+                    <div className="color" style={{ backgroundColor: '#FCDD53' }} onClick={() => setLabel('#FCDD53')}></div>
+                    <div className="color" style={{ backgroundColor: '#FF5757' }} onClick={() => setLabel('#FF5757')}></div>
+                </motion.div>
+            }
+
+
             <div className="option" onClick={() => setShowColors(color => !color)}>Color this card</div>
 
             {showColors && <motion.div initial="out" animate="in" exit="out" variants={pageTransition1}>

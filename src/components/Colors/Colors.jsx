@@ -25,6 +25,7 @@ export default function Colors({ setColorPalette }) {
 
     const selectColor = (color) => {
         const newBoard = { ...board };
+        newBoard.styles.img = "";
         newBoard.styles.background = color;
         dispatch(updateBoard(newBoard));
         setColorPalette(false);

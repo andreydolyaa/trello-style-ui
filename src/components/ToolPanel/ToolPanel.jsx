@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './ToolPanel.scss';
 import { VscPreview } from "react-icons/vsc";
-import { FiChevronDown, FiImage, FiUsers } from "react-icons/fi";
+import { FiChevronDown, FiImage, FiUsers, FiMenu } from "react-icons/fi";
 import { useSelector, useDispatch } from 'react-redux';
 import Colors from '../Colors/Colors';
 import { BiStar } from "react-icons/bi";
@@ -12,7 +12,7 @@ import { FiX, FiCheck, FiSearch } from 'react-icons/fi';
 import { motion } from "framer-motion";
 import Members from './../Members/Members';
 
-export default function ToolPanel({ showBoardsMenu, load, setCreateBoard }) {
+export default function ToolPanel({ showBoardsMenu, load, setCreateBoard, showRightMenu }) {
     const dispatch = useDispatch();
     const titleRef = useRef();
     const searchRef = useRef();
@@ -150,6 +150,10 @@ export default function ToolPanel({ showBoardsMenu, load, setCreateBoard }) {
                     <FiX className="icon-search" onClick={resetSearch} />
                 </motion.div>
             }
+
+            <div className="right-menu-btn btn btn-hover flex">
+                <FiMenu onClick={showRightMenu} />
+            </div>
 
 
         </div>

@@ -13,6 +13,7 @@ import Signup from './pages/Signup/Signup';
 import Login from './pages/Login/Login';
 import { setLoggedUser } from './store/actions/userActions';
 import Members from './components/Members/Members';
+import RightMenu from './components/RightMenu/RightMenu';
 
 
 function App() {
@@ -20,9 +21,11 @@ function App() {
     const [createBoard, setCreateBoard] = useState(false);
     const [moveCard, setMoveCardModal] = useState(false);
     const [boardsDropdown, setBoardsDropdown] = useState(false);
+    const [rightMenu, setRightMenu] = useState(false);
     const boards = useSelector(state => state.boardReducer.boards);
     const board = useSelector(state => state.boardReducer.board);
     const user = useSelector(state => state.userReducer.user);
+
 
     useEffect(() => {
         load();
@@ -30,6 +33,7 @@ function App() {
 
     const createNewBoard = () => setCreateBoard(createBoard => !createBoard);
     const showBoardsMenu = () => setBoardsDropdown(boards => !boards);
+    const showRightMenu = () => setRightMenu(menu => !menu);
     const changeBoard = (id) => dispatch(loadBoard(id));
 
     const load = () => {
@@ -48,8 +52,9 @@ function App() {
         }
     };
 
+
     return boards && board && (
-        <div style={{ backgroundColor: board.styles.background }}>
+        <div style={{ backgroundImage: board.styles.img ? `url(${board.styles.img})` : null, backgroundColor: !board.styles.img ? board.styles.background : null,backgroundRepeat:'no-repeat',backgroundPosition:'center',backgroundAttachment:'fixed' }}>
 
             {createBoard &&
                 <div className="create-board-container">
@@ -73,6 +78,12 @@ function App() {
                         board={board} />
                 </motion.div>}
 
+            {rightMenu &&
+                <div>
+                    <RightMenu />
+                </div>
+            }
+
             <Router>
                 <Navbar
                     user={user}
@@ -87,7 +98,9 @@ function App() {
                         changeBoard={changeBoard}
                         showBoardsMenu={showBoardsMenu}
                         setMoveCardModal={setMoveCardModal}
-                        setCreateBoard={setCreateBoard}/>}>
+                        setCreateBoard={setCreateBoard}
+                        showRightMenu={showRightMenu}
+                    />}>
                     </Route>
                 </Switch>
             </Router>

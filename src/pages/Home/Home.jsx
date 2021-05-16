@@ -11,7 +11,7 @@ import { loadBoard, updateBoard } from '../../store/actions/boardActions';
 import ToolPanel from '../../components/ToolPanel/ToolPanel';
 import { motion } from "framer-motion";
 
-export default function Home({ load, changeBoard, showBoardsMenu, setMoveCardModal, setCreateBoard }) {
+export default function Home({ load, changeBoard, showBoardsMenu, setMoveCardModal, setCreateBoard,showRightMenu }) {
     const titleRef = useRef();
     const dispatch = useDispatch();
     const [isEditable, setIsEditable] = useState(false);
@@ -61,7 +61,7 @@ export default function Home({ load, changeBoard, showBoardsMenu, setMoveCardMod
     return board && (
 
         <div className="home">
-            <ToolPanel showBoardsMenu={showBoardsMenu} load={load} setCreateBoard={setCreateBoard} />
+            <ToolPanel showBoardsMenu={showBoardsMenu} load={load} setCreateBoard={setCreateBoard} showRightMenu={showRightMenu} />
             <DragDropContext onDragEnd={listDragEnd}>
                 <Droppable droppableId="lists" direction="horizontal" type="column">
                     {(provided) => (

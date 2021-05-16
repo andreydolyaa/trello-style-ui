@@ -53,6 +53,15 @@ export default function Card({ card, board, list, setMoveCardModal }) {
         dispatch(updateBoard(updatedBoard));
     }
 
+    const removeLabel = (labelId) => {
+        const updatedBoard = { ...board };
+        const listIdx = updatedBoard.lists.findIndex(currList => currList._id === list._id);
+        const cardIdx = list.cards.findIndex(currCard => currCard._id === card._id);
+        const labelIdx = updatedBoard.lists[listIdx].cards[cardIdx].labels.findIndex(label => label.id === labelId);
+        updatedBoard.lists[listIdx].cards[cardIdx].labels.splice(labelIdx,1);
+        dispatch(updateBoard(updatedBoard));
+    }
+
 
     const pageTransition = {
         in: {
@@ -94,12 +103,21 @@ export default function Card({ card, board, list, setMoveCardModal }) {
             }
             {!showEditCard &&
                 <div>
+                    <div className="labels">
+                        {card.labels.map(label => {
+                            return (
+                                <div className="label" style={{ backgroundColor: label.labelColor }} onClick={()=>removeLabel(label.id)}>
+                                </div>
+                            )
+
+                        })}
+                    </div>
                     <div className="img-container flex-center">
                         {card.img &&
                             <img src={card.img}></img>
                         }
                     </div>
-                    <p>{card.title}</p>
+                    <p className="card-text" style={{marginTop: card.labels.length ? '5px' : null}}>{card.title}</p>
                 </div>
             }
             {showIcon &&

@@ -3,17 +3,19 @@
     top: 115px;
     left: 10px;
     width: 300px;
-    height: 700px;
+    height: 800px;
     background-color: rgb(255, 255, 255);
     border-radius: 3px;
     box-shadow: 1px 1px 1px rgb(75, 75, 75);
     padding: 1rem;
     color: rgb(92, 92, 92);
     p {
-        font-size: 13px;
+        font-size: 15px;
         font-weight: 500;
+        color: rgb(9,30,66);
     }
     overflow-y: scroll;
+    z-index:4;
 }
 
 .starred,
