@@ -106,7 +106,7 @@ export default function Card({ card, board, list, setMoveCardModal }) {
                     <div className="labels">
                         {card.labels.map(label => {
                             return (
-                                <div className="label" style={{ backgroundColor: label.labelColor }} onClick={()=>removeLabel(label.id)}>
+                                <div className="label" style={{ backgroundColor: label.labelColor }} onClick={()=>removeLabel(label.id)} key={label.id}>
                                 </div>
                             )
 
