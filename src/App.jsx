@@ -80,7 +80,7 @@ function App() {
 
             {rightMenu &&
                 <div>
-                    <RightMenu />
+                    <RightMenu setRightMenu={setRightMenu}/>
                 </div>
             }
 

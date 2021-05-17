@@ -1,12 +1,13 @@
 
 
 import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { utils } from '../../services/utils';
-import { setCurrentCard, setCurrentList, updateBoard } from '../../store/actions/boardActions';
+import { setCurrentCard, setCurrentList, updateAction, updateBoard } from '../../store/actions/boardActions';
 import './CardActions.scss';
 import { motion } from "framer-motion";
 import { FiX } from 'react-icons/fi';
+import { userReducer } from './../../store/reducers/userReducer';
 
 
 export default function CardActions({ card, board, list, setShowEditCard, setShowCardActions, setMoveCardModal, setShowIcon }) {
@@ -15,6 +16,7 @@ export default function CardActions({ card, board, list, setShowEditCard, setSho
     const [showColors, setShowColors] = useState(false);
     const [isUploading, setIsUploading] = useState(false);
     const [showLabels, setShowLabels] = useState(false);
+    const user = useSelector(state => state.userReducer.user);
 
     useEffect(() => {
     }, [card, board, list]);
@@ -26,6 +28,7 @@ export default function CardActions({ card, board, list, setShowEditCard, setSho
         updatedBoard.lists[listIdx].cards.splice(cardIdx, 1);
         dispatch(updateBoard(updatedBoard));
         setShowIcon(false);
+        dispatch(updateAction(board, 'deleted card', user));
     }
 
     const copyCard = () => {
@@ -36,6 +39,7 @@ export default function CardActions({ card, board, list, setShowEditCard, setSho
         cardCopy._id = utils.createId();
         updatedBoard.lists[listIdx].cards.splice(cardIdx + 1, 0, cardCopy);
         doUpdate(updatedBoard);
+        dispatch(updateAction(board, 'copied card', user));
     }
 
 
@@ -45,6 +49,7 @@ export default function CardActions({ card, board, list, setShowEditCard, setSho
         const cardIdx = list.cards.findIndex(currCard => currCard._id === card._id);
         updatedBoard.lists[listIdx].cards[cardIdx].styles.background = color;
         doUpdate(updatedBoard);
+        dispatch(updateAction(board, 'changed card color', user));
     }
 
     const setCard = () => {
@@ -62,6 +67,7 @@ export default function CardActions({ card, board, list, setShowEditCard, setSho
         const cardIdx = list.cards.findIndex(currCard => currCard._id === card._id);
         updatedBoard.lists[listIdx].cards[cardIdx].img = imageUrl;
         doUpdate(updatedBoard);
+        dispatch(updateAction(board, 'added image', user));
     }
 
     const doUpdate = (board) => {
@@ -76,19 +82,24 @@ export default function CardActions({ card, board, list, setShowEditCard, setSho
     };
 
     const setLabel = (label) => {
+        const newLabel = {
+            id: utils.createId(),
+            labelColor: label
+        }
         const updatedBoard = { ...board };
         const listIdx = updatedBoard.lists.findIndex(currList => currList._id === list._id);
         const cardIdx = list.cards.findIndex(currCard => currCard._id === card._id);
         if (updatedBoard.lists[listIdx].cards[cardIdx].labels.some(l => l.labelColor === label)) return;
         else {
-            updatedBoard.lists[listIdx].cards[cardIdx].labels.push({ id: utils.createId(), labelColor: label });
+            updatedBoard.lists[listIdx].cards[cardIdx].labels.push(newLabel);
+            dispatch(updateAction(board, 'added a label', user));
             doUpdate(updatedBoard);
         }
     }
 
     return (
         <div className="card-actions">
-            <FiX className="close" style={{ margin: '3px' }} onClick={() => { setShowCardActions(false); setShowIcon(false) }} />
+            <FiX className="close-new" style={{ margin: '3px' }} onClick={() => { setShowCardActions(false); setShowIcon(false) }} />
             <div className="title">Card actions</div>
             <div className="option" onClick={deleteCard}>Delete this card</div>
             <div className="option" onClick={() => setShowEditCard(card => !card)}>Edit this card</div>

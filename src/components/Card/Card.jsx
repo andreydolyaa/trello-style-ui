@@ -3,9 +3,10 @@ import './Card.scss';
 import { VscEdit } from "react-icons/vsc";
 import CardActions from '../CardActions/CardActions';
 import { FiX } from 'react-icons/fi';
-import { useDispatch } from 'react-redux';
-import { updateBoard } from '../../store/actions/boardActions';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateAction, updateBoard } from '../../store/actions/boardActions';
 import { motion } from "framer-motion";
+import { userReducer } from './../../store/reducers/userReducer';
 
 export default function Card({ card, board, list, setMoveCardModal }) {
     const globalRef = useRef();
@@ -14,6 +15,7 @@ export default function Card({ card, board, list, setMoveCardModal }) {
     const [showIcon, setShowIcon] = useState(false);
     const [showCardActions, setShowCardActions] = useState(false);
     const [showEditCard, setShowEditCard] = useState(false);
+    const user = useSelector(state => state.userReducer.user);
 
 
     useEffect(() => {
@@ -60,6 +62,7 @@ export default function Card({ card, board, list, setMoveCardModal }) {
         const labelIdx = updatedBoard.lists[listIdx].cards[cardIdx].labels.findIndex(label => label.id === labelId);
         updatedBoard.lists[listIdx].cards[cardIdx].labels.splice(labelIdx,1);
         dispatch(updateBoard(updatedBoard));
+        dispatch(updateAction(board, 'removed a label', user));
     }
 
 

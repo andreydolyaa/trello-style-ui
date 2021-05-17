@@ -1,5 +1,7 @@
 
 import { boardService } from './../../services/boardService';
+import { utils } from './../../services/utils';
+import moment from 'moment';
 
 export function loadBoards() {
     return async dispatch => {
@@ -48,5 +50,24 @@ export function searchCard(txt, board) {
     }
 }
 
+export function updateAction(board, actionType, user) {
+    var time = moment().format('MMMM Do YYYY, h:mm:ss a');
+    return async dispatch => {
+        const action = {
+            id: utils.createId(),
+            user: user ? user.fullName : 'Anonymous',
+            time,
+            actionType
+        }
+        const updatedBoard = await boardService.addAction(board, action);
+        dispatch({ type: 'SET_ACTION', updatedBoard });
+    }
+}
 
 
+// export function createNewCard(board,list,val,type){
+//     return async dispatch => {
+//         var updatedBoard = await boardService.createCard(board, list, val, type);
+//         dispatch({type:'SET_NEW_CARD',updatedBoard});
+//     }
+// }

@@ -82,7 +82,7 @@ export default function Boards({ boards, changeBoard, closeDropdown, load, board
                             return board.isStarred && (
                                 <div className="boards-list flex" key={board._id} onClick={() => handleChangeBoard(board._id)}>
                                     <div className="flex">
-                                        <div className="board-color" style={{ backgroundColor: board.styles.background }}></div>
+                                        <div className="board-color" style={{ backgroundImage: board.styles.img ? `url(${board.styles.img})` : null, backgroundColor: !board.styles.img ? board.styles.background : null, backgroundSize: "2rem", backgroundRepeat: 'no-repeat' }}></div>
                                         <p >{board.title}</p>
                                     </div>
                                     <div className="trash flex" onClick={(ev) => removeStarred(ev, board)}><BiTrash /></div>

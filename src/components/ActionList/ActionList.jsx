@@ -5,7 +5,7 @@ import { boardService } from '../../services/boardService';
 import './ActionList.scss';
 import { FiX } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
-import { moveListToOtherBoard, updateBoard } from '../../store/actions/boardActions';
+import { moveListToOtherBoard, updateAction, updateBoard } from '../../store/actions/boardActions';
 import { utils } from '../../services/utils';
 
 export default function ActionList({ list, board, setShowActionList, load, changeBoard, setEditListTitle }) {
@@ -15,6 +15,7 @@ export default function ActionList({ list, board, setShowActionList, load, chang
     const [showNewTitle, setShowNewTitle] = useState(false);
     const [moveList, setMoveList] = useState(false);
     const boards = useSelector(state => state.boardReducer.boards);
+    const user = useSelector(state=>state.userReducer.user);
 
     useEffect(() => {
         document.addEventListener('mousedown', onOutSideClick);
@@ -35,6 +36,7 @@ export default function ActionList({ list, board, setShowActionList, load, chang
     const deleteList = async () => {
         var updatedBoard = await boardService.removeList(board, list);
         load();
+        dispatch(updateAction(board, 'removed a list', user));
         changeBoard(updatedBoard._id);
     }
 
@@ -49,6 +51,7 @@ export default function ActionList({ list, board, setShowActionList, load, chang
         listCopy._id = utils.createId();
         boardCopy.lists.splice(listIdx + 1, 0, listCopy);
         dispatch(updateBoard(boardCopy));
+        dispatch(updateAction(board, 'copied list', user));
         setShowActionList(false);
     }
 
@@ -62,6 +65,7 @@ export default function ActionList({ list, board, setShowActionList, load, chang
         else {
             dispatch(moveListToOtherBoard(board._id, newBoard._id, list));
             load();
+            dispatch(updateAction(board, 'moved list to other board', user));
         }
     }
 

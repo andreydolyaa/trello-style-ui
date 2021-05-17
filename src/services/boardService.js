@@ -17,6 +17,7 @@ export const boardService = {
     update,
     moveList,
     removeBoard,
+    addAction
 }
 
 
@@ -99,3 +100,14 @@ async function moveList(srcId, destId, list) {
     return oldBoard;
 }
 
+async function addAction(board, action) {
+    var oldBoard = await loadBoard(board._id);
+    const boardCopy = { ...board };
+    if (oldBoard.actions.length <= 50) {
+        boardCopy.actions.unshift(action);
+    } else {
+        boardCopy.actions.splice(oldBoard.action.length, 1, action);
+    }
+    await update(boardCopy);
+    return board;
+}

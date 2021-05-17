@@ -77,6 +77,13 @@ button:hover {
     cursor: pointer;
     font-size: 14px;
 }
+.close-new{
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
 .create-board-container {
     position: absolute;
     z-index: 2;

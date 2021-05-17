@@ -1,4 +1,5 @@
 import IMG from '../../assets/profile img.jpg';
+import { updateBoard } from './../actions/boardActions';
 
 const INITIAL_STATE = {
     boards: [],
@@ -55,6 +56,12 @@ export function boardReducer(state = INITIAL_STATE, action) {
             return {
                 ...state,
                 list: action.list
+            }
+        }
+        case 'SET_ACTION': {
+            return {
+                ...state,
+                board: action.updatedBoard
             }
         }
         default:
